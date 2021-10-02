@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:re_member/src/modules/communities/discussion.dart';
 import 'package:re_member/src/modules/discover/discover.dart';
 
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
@@ -35,7 +36,7 @@ class _Communities2State extends State<Communities2>
                 child: FloatingTabBar(collectionTabs: [
                   Tab(
                     child: Text(
-                      "DISCOVERY",
+                      "DISCUSSION",
                     ),
                   ),
                   Tab(
@@ -47,19 +48,19 @@ class _Communities2State extends State<Communities2>
                 ], tabController: blah),
               ),
             ),
-            SizedBox(
-              height: 20,
-              child: TabBarView(children: [
-                Container(
-                  child: Text("KOKO"),
-                ),
-                Container(
-                  child: Text("lolo"),
-                ),
-                Container(
-                  child: Text("NONO"),
-                )
-              ],controller: blah,),
+            SafeArea(
+              child: SizedBox(
+               height:MediaQuery.of(context).size.height*.7,
+                child: TabBarView(children: [
+               Discussion(),
+                  Container(
+                    child: Text("lolo"),
+                  ),
+                  Container(
+                    child: Text("NONO"),
+                  )
+                ],controller: blah,),
+              ),
             )
           ],
         ),
