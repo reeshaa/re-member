@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:re_member/src/configs/theme_config.dart';
 import 'package:re_member/src/root.dart';
 import 'package:re_member/src/services/auth_service.dart';
 
@@ -32,9 +32,10 @@ class MyApp extends StatelessWidget {
         // themeMode: settingsController.themeMode,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(), //TODO: CHOSE FONT
-        ),
+            // textTheme: GoogleFonts.poppinsTextTheme(), //TODO: CHOSE FONT
+            ),
         home: Root().getHome(),
+        scrollBehavior: ScrollWithoutMaterialOverflowGlow(),
       ),
     );
   }

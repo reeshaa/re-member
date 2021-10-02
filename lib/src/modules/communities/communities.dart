@@ -1,8 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:re_member/src/modules/communities/communities2.dart';
+import 'package:re_member/src/modules/communities/model/community.dart';
+import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/service_locator.dart';
+import 'package:re_member/src/services/userService.dart';
 
 class Communities extends StatefulWidget {
   const Communities({Key? key}) : super(key: key);
@@ -21,83 +22,45 @@ final List<String> imgList = [
 ];
 
 class _CommunitiesState extends State<Communities> {
+  List<Community>? communities;
+
+  bool isLoading = true;
+
   @override
-  Widget build(BuildContext context) {
-    final List<Widget> communitySliders = imgList
-        .map((item) => Container(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Communities2()),
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.all(10.0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      child: Stack(
-                        children: <Widget>[
-                          Image.network(item,
-                              fit: BoxFit.fitHeight, width: 150),
-                          Positioned(
-                            bottom: 0.0,
-                            left: 0.0,
-                            right: 0.0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color.fromARGB(200, 0, 0, 0),
-                                    Color.fromARGB(0, 0, 0, 0)
-                                  ],
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                ),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 20.0),
-                              child: Text(
-                                'Physics',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-            ))
-        .toList();
-    final List<Widget> otherCommunitySliders = imgList
-        .map((item) => Container(
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  _getData() async {
+    var data = await ServiceLocator<Api>().GET(Api.allCommunitiesEndpoint);
+    if (data != null && data.statusCode == 200) {
+      communities = data.data["communities"]
+          .map<Community>((a) => Community.fromMap(a))
+          .toList();
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  List<Widget> communitySliders() => communities!
+      .map((item) => Container(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Communities2()),
+                );
+              },
               child: Container(
                 margin: EdgeInsets.all(10.0),
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     child: Stack(
                       children: <Widget>[
-                        Image.network(item, fit: BoxFit.fitHeight, width: 400),
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 24.0),
-                            child: Text(
-                              "Astronomy",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
+                        Image.network(item.imageURL,
+                            fit: BoxFit.fitHeight, width: 150),
                         Positioned(
                           bottom: 0.0,
                           left: 0.0,
@@ -115,103 +78,190 @@ class _CommunitiesState extends State<Communities> {
                             ),
                             padding: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 20.0),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Icon(
-                                        Icons.remove_red_eye,
-                                        color: Colors.white,
-                                        size: 16,
-                                      ),
-                                      Text(
-                                        '36.2K',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    '144.2K',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )
-                                ]),
+                            child: Text(
+                              item.communityName,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     )),
               ),
-            ))
-        .toList();
-    var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            // SliverToBoxAdapter(
-            //   child: SizedBox(
-            //     height: 25,
-            //   ),
-            // ),
-            SliverAppBar(
-              expandedHeight: 250,
-              floating: true,
-              snap: true,
-              backgroundColor: Colors.white,
-              title: Container(
-                margin: const EdgeInsets.fromLTRB(8, 12, 8, 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: null,
-                      icon: Icon(Icons.menu),
-                      iconSize: size.width * 0.08,
+            ),
+          ))
+      .toList();
+
+  List<Widget> otherCommunitySliders() => communities!
+      .map((item) => Container(
+            child: Container(
+              margin: EdgeInsets.all(10.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(
+                      item.imageURL,
+                      fit: BoxFit.cover,
+                      width: 400,
+                      height: 200,
                     ),
-                    IconButton(
-                      onPressed: null,
-                      icon: Icon(Icons.notifications),
-                      iconSize: size.width * 0.08,
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 24.0),
+                        child: Text(
+                          item.communityName,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(
+                                  Icons.remove_red_eye,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                Text(
+                                  item.participantsCount.toString(),
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              item.participantsCount.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              bottom: InterestsScroll(
-                list: communitySliders,
-              ),
             ),
-            SliverFillRemaining(
-              child: Column(
+          ))
+      .toList();
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.menu),
+                  iconSize: size.width * 0.08,
+                ),
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.menu),
+                  iconSize: size.width * 0.08,
+                ),
+              ],
+            ),
+            InterestsScroll(
+              isLoading: isLoading,
+              isError: communities == null,
+            ),
+            Flexible(
+              child: ListView(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.01,
+                        horizontal: size.width * 0.05),
+                    child: Text(
+                      "What topic interests you today?",
+                      style: TextStyle(
+                          fontSize: size.width * 0.05,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  Container(
+                    height: size.height * 0.15,
+                    // width: size.width * 0.95,
+                    margin: EdgeInsets.only(left: 8),
+                    child: isLoading
+                        ? Center(child: Text("Fetching your interests"))
+                        : (communities == null)
+                            ? Center(child: Text("Error"))
+                            : ListView(
+                                physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                children: communitySliders(),
+                              ),
+                  ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                         size.width * 0.05,
                         size.height * 0.055,
                         size.width * 0.05,
                         size.height * 0.03),
-                    child: Text("Discover",
-                        style: TextStyle(
-                            fontSize: size.height * 0.042,
-                            fontWeight: FontWeight.w700)),
+                    child: Text(
+                      "Discover",
+                      style: TextStyle(
+                        fontSize: size.height * 0.042,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
-                  Flexible(
-                    child: ListView(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: size.width * 0.08),
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        children: otherCommunitySliders),
+                  Column(
+                    children: isLoading
+                        ? [
+                            Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ]
+                        : ((communities == null)
+                            ? [
+                                Text("Error"),
+                              ]
+                            : otherCommunitySliders()),
                   ),
                 ],
               ),
@@ -223,70 +273,47 @@ class _CommunitiesState extends State<Communities> {
   }
 }
 
-class InterestsScroll extends StatelessWidget implements PreferredSizeWidget {
-  final List<Widget> list;
+class InterestsScroll extends StatelessWidget {
+  final bool isLoading;
+  final bool isError;
   const InterestsScroll({
     Key? key,
-    required this.list,
+    required this.isLoading,
+    required this.isError,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: size.height * 0.03, horizontal: size.width * 0.05),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: size.height * 0.03, horizontal: size.width * 0.05),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello Reesha!",
-                    style: TextStyle(
-                      fontSize: size.height * 0.042,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text("Welcome back",
-                      style: TextStyle(
-                        fontSize: size.height * 0.022,
-                      )),
-                ],
+              Text(
+                "Hello " + (ServiceLocator<UserService>().name ?? "Anonymous"),
+                style: TextStyle(
+                  fontSize: size.height * 0.042,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
               ),
-              CircleAvatar(
-                backgroundColor: Colors.amber,
-                radius: size.width * 0.075,
-              )
+              Text("Welcome back",
+                  style: TextStyle(
+                    fontSize: size.height * 0.022,
+                  )),
             ],
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: size.height * 0.01, horizontal: size.width * 0.05),
-          child: Text(
-            "What topic interests you today?",
-            style: TextStyle(
-                fontSize: size.width * 0.05, fontStyle: FontStyle.italic),
-          ),
-        ),
-        Container(
-          height: size.height * 0.15,
-          // width: size.width * 0.95,
-          margin: EdgeInsets.only(left: 8),
-          child: ListView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              children: list),
-        ),
-      ],
+          CircleAvatar(
+            backgroundColor: Colors.amber,
+            radius: size.width * 0.075,
+          )
+        ],
+      ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(300.0);
 }

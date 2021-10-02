@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class Api {
   static String baseUrl = 'http://aakashp.freemyip.com/re-member-server/';
@@ -10,6 +11,7 @@ class Api {
   // Getters for API end-points
   static String get loginEndpoint => 'login';
   static String get registerEndpoint => 'register';
+  static String get allCommunitiesEndpoint => 'community/all';
   Api() {
     options = BaseOptions(
       baseUrl: baseUrl,
@@ -19,16 +21,17 @@ class Api {
 
   // ignore: non_constant_identifier_names
   Future<Response<dynamic>?> GET(String path) async {
-    // debugPrint(path);
+    debugPrint(baseUrl);
+    debugPrint(path);
     Response<dynamic>? response;
     try {
       response = await _dio.get(path);
-      // debugPrint(response);
+      debugPrint(response.toString());
     } on SocketException catch (e) {
       print("Socket exception:");
       print(e);
     } on DioError catch (e) {
-      print("DioError");
+      print(e);
       print(e.response);
       if (e.type == DioErrorType.response) {
         return e.response;
