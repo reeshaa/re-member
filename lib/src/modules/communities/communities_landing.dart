@@ -5,6 +5,7 @@ import 'package:re_member/src/modules/communities/model/community.dart';
 import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/services/userService.dart';
+import 'package:re_member/src/widgets/avatar.dart';
 
 class CommunitiesLanding extends StatefulWidget {
   const CommunitiesLanding({Key? key}) : super(key: key);
@@ -328,10 +329,7 @@ class InterestsScroll extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => ProfilePage()),
               );
             },
-            child: CircleAvatar(
-              backgroundColor: Colors.amber,
-              radius: size.width * 0.075,
-            ),
+            child: Avatar(size: size),
           )
         ],
       ),

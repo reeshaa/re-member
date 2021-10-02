@@ -4,6 +4,7 @@ import 'package:re_member/src/modules/discover/discover.dart';
 import 'package:re_member/src/modules/focus_mode/focus.dart';
 import 'package:re_member/src/modules/leaderboard/leaderboard.dart';
 import 'package:re_member/src/modules/settings/settings.dart';
+import 'package:re_member/src/pages/profile_page.dart';
 import 'package:re_member/src/utils/constants.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -14,15 +15,15 @@ class Home extends StatefulWidget {
 
 /// This is the private State class that goes with Center.
 class _HomeState extends State<Home> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    FocusMode(),
-    Discover(),
+    // FocusMode(),
     Communities(),
+    Discover(),
     LeaderBoard(),
-    SettingsPage(),
+    ProfilePage(isAtRoot: true),
   ];
 
   void _onItemTapped(int index) {
@@ -45,27 +46,26 @@ class _HomeState extends State<Home> {
           ),
           margin: const EdgeInsets.all(8.0),
           child: BottomNavigationBar(
-            backgroundColor: Colors.red,
             items: const <BottomNavigationBarItem>[
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.do_not_disturb_on_outlined),
+              //   label: 'Focus',
+              // ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.do_not_disturb_on_outlined),
-                label: 'Focus',
+                icon: Icon(Icons.dashboard_rounded),
+                label: 'Dashboard',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Discover',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.leaderboard_rounded),
                 label: 'Leaderboard',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'settings',
+                icon: Icon(Icons.account_circle),
+                label: 'Profile',
               ),
             ],
             currentIndex: _selectedIndex,
