@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:re_member/src/Pages/home.dart';
 import 'package:re_member/src/services/service_locator.dart';
 
 import 'src/app.dart';

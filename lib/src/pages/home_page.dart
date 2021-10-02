@@ -3,23 +3,23 @@ import 'package:re_member/src/Pages/discover.dart';
 import 'package:re_member/src/Pages/focus.dart';
 import 'package:re_member/src/Pages/leaderboard.dart';
 import 'package:re_member/src/Pages/setting.dart';
-import 'package:re_member/src/pages/home.dart';
+import 'package:re_member/src/modules/communities/communities.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class Centeral extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  State<Centeral> createState() => _CenteralState();
+  State<Home> createState() => _HomeState();
 }
 
 /// This is the private State class that goes with Center.
-class _CenteralState extends State<Centeral> {
+class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     FocusMode(),
     Discover(),
-    Home(),
+    Communities(),
     Setting(),
     LeaderBoard()
   ];

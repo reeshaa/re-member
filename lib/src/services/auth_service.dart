@@ -19,6 +19,10 @@ class AuthService extends ChangeNotifier {
   }
 
   attemptLogin(BuildContext context, String email, String password) async {
+    _authState = AuthState.loggedIn;
+    notifyListeners();
+    return;
+
     print("Entered login function");
     email = email.trim();
     password = password.trim();
@@ -28,10 +32,10 @@ class AuthService extends ChangeNotifier {
     };
     // debugPrint(body.toString());
     Response<dynamic>? response;
-    _authState = AuthState.loggedIn;
-    notifyListeners();
+    // _authState = AuthState.loggedIn;
+    // notifyListeners();
 
-    return;
+    // return;
     try {
       // This request will carry empty Authorization token, which should be ignored by the server
       response = await ServiceLocator<Api>().POST(Api.loginEndpoint, body);
@@ -45,6 +49,43 @@ class AuthService extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  register(
+      BuildContext context, String email, String password, String name) async {
+    print("Entered register function");
+    email = email.trim();
+    password = password.trim();
+    name = name.trim();
+    Map<String, dynamic> body = <String, dynamic>{
+      "email": email,
+      "pass": password,
+      "displayName": name,
+    };
+    // debugPrint(body.toString());
+    Response<dynamic>? response;
+    // _authState = AuthState.loggedIn;
+    // notifyListeners();
+
+    // return;
+    try {
+      // This request will carry empty Authorization token, which should be ignored by the server
+      response = await ServiceLocator<Api>().POST(Api.registerEndpoint, body);
+      if (response == null) {
+        print("Null Response");
+        // Trigger error message
+        // return connectionFailedFallback(context);
+      } else {
+        if (response.statusCode == 200) {
+          _authState = AuthState.loggedIn;
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      // return invalidServerResponseFallback(context);
+    }
+
+    // notifyListeners();
   }
 
   /// Checks if [_accessToken] is a valid JWT or not
