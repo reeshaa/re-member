@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:re_member/src/modules/communities/communities2.dart';
+import 'package:re_member/src/modules/communities/community_detailed.dart';
 import 'package:re_member/src/modules/communities/model/community.dart';
 import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/service_locator.dart';
@@ -50,7 +50,10 @@ class _CommunitiesState extends State<Communities> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Communities2()),
+                  MaterialPageRoute(
+                      builder: (context) => Communities2(
+                            community: item,
+                          )),
                 );
               },
               child: Container(
@@ -100,7 +103,10 @@ class _CommunitiesState extends State<Communities> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Communities2()),
+                MaterialPageRoute(
+                    builder: (context) => Communities2(
+                          community: item,
+                        )),
               );
             },
             child: Container(
