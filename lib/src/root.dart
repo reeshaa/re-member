@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:re_member/src/pages/home_page.dart';
 import 'package:re_member/src/pages/login_page.dart';
+import 'package:re_member/src/pages/splash_screen.dart';
 import 'package:re_member/src/services/auth_service.dart';
 import 'package:re_member/src/utils/enum.dart';
 
@@ -18,7 +19,7 @@ class Root {
           case AuthState.loggedIn:
             return Home();
           case AuthState.none:
-            return LoginPage();
+            return SplashScreen();
           default:
             return LoginPage();
           // return App(); //Uncomment to bypass login for testing purposes
