@@ -1,14 +1,13 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/auth_service.dart';
 import 'package:re_member/src/services/service_locator.dart';
-import 'package:re_member/src/utils/enum.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -22,9 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
   bool isLoading = false;
   final RegExp emailValidatorRegExp =
       RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+  bool isRegisterMode = false;
 
   @override
   void initState() {
@@ -39,27 +41,30 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  _saveDetails(String _authToken, String user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('auth-token', _authToken);
-    await prefs.setString('user', user);
+  toggleRegisterMode() {
+    setState(() {
+      this.isRegisterMode = !isRegisterMode;
+    });
   }
 
-  _attemptLogin(String _email, _password) async {
+  _attemptRegister(String _email, String _password, String _name) async {
+    Provider.of<AuthService>(context, listen: false)
+        .register(context, _email, _password, _name);
+  }
+
+  _attemptLogin(String _email, String _password) async {
     Provider.of<AuthService>(context, listen: false)
         .attemptLogin(context, 'xx', 'yy');
     return;
-    String url = 'https://ecommerce-calculator.herokuapp.com/api/MPC/login';
-    Map<String, String> headers = {"Content-type": "application/json"};
     var postobj = {
       "email": _email,
-      "password": _password,
+      "pass": _password,
     };
     String message = '';
     Response? response;
     var respobj;
     try {
-      response = await ServiceLocator<Api>().POST(url, postobj);
+      response = await ServiceLocator<Api>().POST(Api.loginEndpoint, postobj);
       respobj = json.decode(response?.data);
       message = respobj["message"] ?? "Null";
     } catch (e) {
@@ -186,9 +191,40 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         )),
                     Padding(
+                      padding: EdgeInsets.fromLTRB(0, 15, 40, 0),
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value?.isEmpty ?? false) {
+                            return "Password cannot be empty";
+                          }
+
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: SvgPicture.asset("assets/Lock.svg",
+                                color: Colors.grey[900]),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(30),
+                                bottomRight: Radius.circular(30)),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: isRegisterMode,
+                      child: Padding(
                         padding: EdgeInsets.fromLTRB(0, 15, 40, 0),
                         child: TextFormField(
-                          controller: passwordController,
+                          controller: nameController,
                           obscureText: true,
                           validator: (value) {
                             if (value?.isEmpty ?? false) {
@@ -198,7 +234,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: "Password",
+                            labelText: "Name",
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(12),
@@ -212,14 +248,16 @@ class _LoginPageState extends State<LoginPage> {
                               borderSide: BorderSide(color: Colors.grey),
                             ),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: size.height * 0.06,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        FlatButton(
+                        TextButton(
                           child: Text(
                             "New here? Register now",
                             style: TextStyle(
@@ -227,31 +265,42 @@ class _LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.w600,
                                 color: Colors.grey[700]),
                           ),
-                          onPressed: () {},
+                          onPressed: toggleRegisterMode,
                         ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 5),
                           child: ElevatedButton(
                             child: AnimatedContainer(
-                                duration: const Duration(microseconds: 500),
-                                padding: EdgeInsets.all(15),
-                                child: (isLoading)
-                                    ? CupertinoActivityIndicator()
-                                    : Text(
-                                        'SIGN IN',
-                                        style: TextStyle(
-                                            fontSize: regularfont * 0.9,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w800),
-                                      )),
+                              duration: const Duration(microseconds: 500),
+                              padding: EdgeInsets.all(15),
+                              child: (isLoading)
+                                  ? CupertinoActivityIndicator()
+                                  : Text(
+                                      (isRegisterMode) ? 'REGISTER' : 'SIGN IN',
+                                      style: TextStyle(
+                                          fontSize: regularfont * 0.9,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                            ),
                             onPressed: () {
                               if (formKey.currentState!.validate() &&
                                   !isLoading) {
-                                setState(() {
-                                  isLoading = true;
-                                });
-                                _attemptLogin(emailController.text.trim(),
-                                    passwordController.text.trim());
+                                setState(
+                                  () {
+                                    isLoading = true;
+                                  },
+                                );
+                                if (isRegisterMode)
+                                  _attemptRegister(
+                                      emailController.text.trim(),
+                                      passwordController.text.trim(),
+                                      nameController.text.trim());
+                                else
+                                  _attemptLogin(
+                                    emailController.text.trim(),
+                                    passwordController.text.trim(),
+                                  );
                               }
                             },
                           ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Communities extends StatefulWidget {
+  const Communities({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _CommunitiesState createState() => _CommunitiesState();
 }
 
-class _HomeState extends State<Home> {
+class _CommunitiesState extends State<Communities> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
