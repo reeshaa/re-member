@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
         child: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.center_focus_strong),
+              icon: Icon(Icons.do_not_disturb_on_outlined),
               label: 'Focus',
             ),
             BottomNavigationBarItem(

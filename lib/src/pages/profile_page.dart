@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:re_member/src/Pages/models/profile_entry.dart';
+import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/utils/constants.dart';
 import 'package:re_member/src/widgets/AchievementCard.dart';
 
@@ -10,7 +13,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  Profile_Entry? entry;
+  bool isLoading = true;
+
   @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
+  @override
+  _getData() async {
+    var data = await ServiceLocator<Api>().GET(Api.profileEndpoint);
+    if (data != null && data.statusCode == 200) {
+      entry = Profile_Entry.fromMap(data.data);
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -47,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Reesha ",
+                      Text(entry!.displayName,
                           style: TextStyle(
                               fontSize: size.height * 0.042,
                               fontWeight: FontWeight.w700)),
@@ -137,7 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         "assets/images/medal.png",
                         height: size.width * 0.12,
                       ),
-                      heading: "1136 LP",
+                      heading: "${entry?.points} LP",
                       subheading: "Total Points",
                       size: size,
                     ),
@@ -163,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         "assets/images/q.png",
                         height: size.width * 0.12,
                       ),
-                      heading: "20 Q",
+                      heading: "${entry?.questionsCount} Q",
                       subheading: "Total questions",
                       size: size,
                     ),
@@ -172,7 +194,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         "assets/images/a.png",
                         height: size.width * 0.1,
                       ),
-                      heading: "3 ans",
+                      heading: "${entry?.answersCount} ans",
                       subheading: "Total answered",
                       size: size,
                     ),

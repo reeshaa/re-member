@@ -16,6 +16,7 @@ class Api {
   static String get resetPassEndpoint => 'resetpass';
   static String get leaderboardEndpoint => 'leaderboard';
   static String get allCommunitiesEndpoint => 'community/all';
+  static String get profileEndpoint => 'user/O0dtUv8DM2b2qEn7aiFBcfe3KOu2';
   static String get forumQuestionEndpoint => 'forumQuestion';
   Api() {
     options = BaseOptions(
