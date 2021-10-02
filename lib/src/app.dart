@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:re_member/src/pages/centeral.dart';
 import 'package:re_member/src/pages/home.dart';
 import 'package:re_member/src/pages/login_page.dart';
 
@@ -77,7 +78,7 @@ class MyApp extends StatelessWidget {
                     return LoginPage();
                   case SampleItemListView.routeName:
                   default:
-                    return const home();
+                    return Centeral();
                 }
               },
             );
