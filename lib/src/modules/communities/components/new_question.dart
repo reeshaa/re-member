@@ -19,43 +19,21 @@ class _NewQuestionState extends State<NewQuestion> {
   bool isLoading = false;
 
   _onPress() async {
+    // return "Hello from dialog";
     if (formKey.currentState?.validate() ?? false) {
-      setState(() {
-        isLoading = true;
-      });
-      String _email = _textEditingController.value.text.trim();
-      var body = <String, dynamic>{
-        "email": _email,
-      };
-      var response;
-      //     await ServiceLocator<Api>().POST(Api.resetPassEndpoint, body);
-
-      if (true && response != null && response.statusCode == 200) {
-        Navigator.pop(context);
-        CoolAlert.show(
-          context: context,
-          type: CoolAlertType.success,
-          confirmBtnText: "Okay",
-          title: "Reset link sent",
-          text: "Follow the instructions in the email to reset your password.",
-        );
-      } else {
-        Navigator.pop(context);
-        CoolAlert.show(
-          context: context,
-          type: CoolAlertType.error,
-          confirmBtnText: "Okay",
-          title: "Reset failed",
-        );
-      }
+      Navigator.pop(context, _textEditingController.value.text);
     }
+  }
+
+  _onCancel() async {
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 320,
+        height: 340,
         width: MediaQuery.of(context).size.width * 0.85,
         decoration: BoxDecoration(
           borderRadius: borderRadiusLarge,
@@ -114,9 +92,18 @@ class _NewQuestionState extends State<NewQuestion> {
                         },
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: _onPress,
-                      child: Text("Send link"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _onCancel,
+                          child: Text("Cancel"),
+                        ),
+                        ElevatedButton(
+                          onPressed: _onPress,
+                          child: Text("Send link"),
+                        ),
+                      ],
                     ),
                   ],
                 ),

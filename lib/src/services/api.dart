@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:re_member/src/services/service_locator.dart';
+import 'package:re_member/src/services/userService.dart';
 
 class Api {
   static String baseUrl = 'http://aakashp.freemyip.com/re-member-server/';
@@ -14,6 +16,7 @@ class Api {
   static String get resetPassEndpoint => 'resetpass';
   static String get leaderboardEndpoint => 'leaderboard';
   static String get allCommunitiesEndpoint => 'community/all';
+  static String get forumQuestionEndpoint => 'forumQuestion';
   Api() {
     options = BaseOptions(
       baseUrl: baseUrl,
@@ -28,7 +31,7 @@ class Api {
     Response<dynamic>? response;
     try {
       response = await _dio.get(path);
-      debugPrint(response.toString());
+      // debugPrint(response.toString());
     } on SocketException catch (e) {
       print("Socket exception:");
       print(e);
@@ -53,7 +56,16 @@ class Api {
     try {
       print(path);
       print(baseUrl);
-      response = await _dio.post(path, data: body);
+      print(ServiceLocator<UserService>().uid);
+      response = await _dio.post(
+        path,
+        data: body,
+        options: Options(
+          headers: <String, dynamic>{
+            'uid': ServiceLocator<UserService>().uid,
+          },
+        ),
+      );
       print(response);
     } on SocketException catch (e) {
       print(e);

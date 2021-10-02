@@ -37,6 +37,7 @@ class AuthService extends ChangeNotifier {
     debugPrint("Auth Data:");
     debugPrint(_email);
     debugPrint(_uid);
+    ServiceLocator<UserService>().uid = _uid;
     return;
   }
 
@@ -133,11 +134,11 @@ class AuthService extends ChangeNotifier {
       } else {
         if (response.statusCode == 200) {
           _authState = AuthState.loggedIn;
-          notifyListeners();
 
           var data = response.data;
           _uid = data['uid'];
           _email = email;
+          notifyListeners();
 
           _saveCredentials();
           _initUserProfile(data);
