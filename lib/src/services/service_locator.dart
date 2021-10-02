@@ -7,6 +7,6 @@ final ServiceLocator = GetIt.instance;
 
 /// Register various services used within the app to ensure neat transactions
 ///  between UI and API layers
-void createLocator() {
+void setup() {
   ServiceLocator.registerSingleton<Api>(Api());
 }

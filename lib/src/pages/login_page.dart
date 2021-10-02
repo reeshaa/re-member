@@ -3,8 +3,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/auth_service.dart';
 import 'package:re_member/src/services/service_locator.dart';
+import 'package:re_member/src/utils/enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -43,6 +46,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _attemptLogin(String _email, _password) async {
+    Provider.of<AuthService>(context, listen: false)
+        .attemptLogin(context, 'xx', 'yy');
+    return;
     String url = 'https://ecommerce-calculator.herokuapp.com/api/MPC/login';
     Map<String, String> headers = {"Content-type": "application/json"};
     var postobj = {
