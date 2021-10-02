@@ -5,6 +5,7 @@ import 'package:re_member/src/modules/communities/model/community.dart';
 import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/services/userService.dart';
+import 'package:re_member/src/utils/constants.dart';
 import 'package:re_member/src/widgets/avatar.dart';
 
 class CommunitiesLanding extends StatefulWidget {
@@ -199,89 +200,92 @@ class _CommunitiesLandingState extends State<CommunitiesLanding> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Row(
+    return Scaffold(
+      body: Column(
+        children: [
+          Padding(
+            padding: topPadding,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  onPressed: null,
+                  onPressed: () {},
                   icon: Icon(Icons.menu),
-                  iconSize: size.width * 0.08,
+                  color: Colors.grey,
+                  iconSize: size.width * 0.07,
                 ),
                 IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.menu),
-                  iconSize: size.width * 0.08,
+                  onPressed: () {},
+                  icon: Icon(Icons.notifications),
+                  color: Colors.grey,
+                  iconSize: size.width * 0.07,
                 ),
               ],
             ),
-            InterestsScroll(
-              isLoading: isLoading,
-              isError: communities == null,
-            ),
-            Flexible(
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: size.height * 0.01,
-                        horizontal: size.width * 0.05),
-                    child: Text(
-                      "What topic interests you today?",
-                      style: TextStyle(
-                          fontSize: size.width * 0.05,
-                          fontStyle: FontStyle.italic),
-                    ),
+          ),
+          InterestsScroll(
+            isLoading: isLoading,
+            isError: communities == null,
+          ),
+          Flexible(
+            child: ListView(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: size.height * 0.01,
+                      horizontal: size.width * 0.05),
+                  child: Text(
+                    "What topic interests you today?",
+                    style: TextStyle(
+                        fontSize: size.width * 0.05,
+                        fontStyle: FontStyle.italic),
                   ),
-                  Container(
-                    height: size.height * 0.15,
-                    // width: size.width * 0.95,
-                    margin: EdgeInsets.only(left: 8),
-                    child: isLoading
-                        ? Center(child: Text("Fetching your interests"))
-                        : (communities == null)
-                            ? Center(child: Text("Error"))
-                            : ListView(
-                                physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                children: communitySliders(),
-                              ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        size.width * 0.05,
-                        size.height * 0.055,
-                        size.width * 0.05,
-                        size.height * 0.03),
-                    child: Text(
-                      "Discover",
-                      style: TextStyle(
-                        fontSize: size.height * 0.042,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  Column(
-                    children: isLoading
-                        ? [
-                            Center(
-                              child: CircularProgressIndicator(),
+                ),
+                Container(
+                  height: size.height * 0.15,
+                  // width: size.width * 0.95,
+                  margin: EdgeInsets.only(left: 8),
+                  child: isLoading
+                      ? Center(child: Text("Fetching your interests"))
+                      : (communities == null)
+                          ? Center(child: Text("Error"))
+                          : ListView(
+                              physics: BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              children: communitySliders(),
                             ),
-                          ]
-                        : ((communities == null)
-                            ? [
-                                Text("Error"),
-                              ]
-                            : otherCommunitySliders()),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      size.width * 0.05,
+                      size.height * 0.055,
+                      size.width * 0.05,
+                      size.height * 0.03),
+                  child: Text(
+                    "Discover",
+                    style: TextStyle(
+                      fontSize: size.height * 0.042,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ],
-              ),
+                ),
+                Column(
+                  children: isLoading
+                      ? [
+                          Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ]
+                      : ((communities == null)
+                          ? [
+                              Text("Error"),
+                            ]
+                          : otherCommunitySliders()),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -301,7 +305,7 @@ class InterestsScroll extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: size.height * 0.03, horizontal: size.width * 0.05),
+          vertical: size.height * 0.02, horizontal: size.width * 0.05),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
