@@ -39,6 +39,7 @@ class _ResourcesState extends State<Resources> {
     }
   }
 
+  // ignore: unused_element
   Future<void> _launchInWebViewWithJavaScript(String url) async {
     if (await canLaunch(url)) {
       await launch(
@@ -99,7 +100,16 @@ class _ResourcesState extends State<Resources> {
 
   @override
   Widget build(BuildContext context) {
-    const String toLaunch = 'https://www.wwe.com/';
+    const String toLaunch1 = 'https://colab.research.google.com/drive/1ARsuqbpC14bGxgcZPWSFejzcGntLhLw_#scrollTo=M-uadQI_PkVY';
+    const String toLaunch2 = 'https://drive.google.com/drive/u/0/folders/1MJSvvtxpS0roo70oiH-zr_crG9Tmq6Mk';
+    const String toLaunch3 = 'https://drive.google.com/drive/u/0/folders/1SNjs4ty7iHofpgJz7nuOGKPKbpsCUu9W';
+    const String toLaunch4 = 'https://drive.google.com/drive/u/0/folders/1unWuBhumIo8NKz95F9YkSW7p3VajV19t';
+    const String toLaunch5 = 'https://drive.google.com/drive/u/0/folders/1uowmNVcw7VinpOzCDSG62NeWHgA6E0JL';
+    const String toLaunch6 = 'https://drive.google.com/drive/u/0/folders/1q58MdYjBBQjB5LNngHihUMaG1qm__D5m';
+    const String toLaunch7 = 'https://drive.google.com/drive/u/0/folders/1_qDN50adBLe7nG82MrsE9BZh_br6ENaa';
+    const String toLaunch8 = 'https://drive.google.com/drive/u/0/folders/1ATT3IbJ6m70irRZ6h79-N_ckjjDtUYWA';
+    const String toLaunch9 = 'https://drive.google.com/drive/u/0/folders/14494JuqsZdCugTxyC5_MawU8TkLhbsUF';
+    const String toLaunch10 = 'https://drive.google.com/drive/u/0/folders/1H0gtbAN0vGcTqzDw3yr4kU2KfKlC7FRt';
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -108,82 +118,65 @@ class _ResourcesState extends State<Resources> {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch1);
                 }),
-                child: const Text('wwe'),
+                child: const Text('DBMS'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch2);
                 }),
-                child: const Text('wwe'),
+                child: const Text('JAVA LAB'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch3);
                 }),
-                child: const Text('wwe'),
+                child: const Text('JAVA THEORY'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch4);
                 }),
-                child: const Text('wwe'),
+                child: const Text('CN LAB'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch5);
                 }),
-                child: const Text('wwe'),
+                child: const Text('OPERATING SYSTEM'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch6);
                 }),
-                child: const Text('wwe'),
+                child: const Text('MICROPROCESSOR'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch7);
                 }),
-                child: const Text('wwe'),
+                child: const Text('PYTHON LAB'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch8);
                 }),
-                child: const Text('wwe'),
+                child: const Text('SOFTWARE ENGINEERING'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch9);
                 }),
-                child: const Text('wwe'),
+                child: const Text('IPR'),
               ),
               ElevatedButton(
                 onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
+                  _launched = _launchInBrowser(toLaunch10);
                 }),
-                child: const Text('wwe'),
+                child: const Text('TOC'),
               ),
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ),
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ),
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ),
+             
               const Padding(padding: EdgeInsets.all(16.0)),
               Link(
                 uri: Uri.parse(
