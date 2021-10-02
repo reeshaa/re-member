@@ -7,7 +7,7 @@ import 'package:re_member/src/modules/communities/communities2.dart';
 import 'package:re_member/src/modules/focus_mode/focus.dart';
 import 'package:re_member/src/modules/leaderboard/leaderboard.dart';
 import 'package:re_member/src/modules/settings/settings.dart';
-import 'package:re_member/src/utils/border_radii.dart';
+import 'package:re_member/src/utils/constants.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Home extends StatefulWidget {
