@@ -43,25 +43,23 @@ class _Communities2State extends State<Communities2>
         "question": message,
         "communityId": widget.community.communityId,
       };
-      var response;
-      await ServiceLocator<Api>().POST(Api.forumQuestionEndpoint, body);
+      var response =
+          await ServiceLocator<Api>().POST(Api.forumQuestionEndpoint, body);
 
       if (response != null && response.statusCode == 200) {
-        Navigator.pop(context, "Hello from dialog");
         CoolAlert.show(
           context: context,
           type: CoolAlertType.success,
-          confirmBtnText: "Okay",
-          title: "Reset link sent",
-          text: "Follow the instructions in the email to reset your password.",
+          confirmBtnText: "Yayy !",
+          title: "Your question has been posted !",
+          text: response.data["message"],
         );
       } else {
-        Navigator.pop(context, "Hello from dialog");
         CoolAlert.show(
           context: context,
           type: CoolAlertType.error,
           confirmBtnText: "Okay",
-          title: "Reset failed",
+          title: "Question could not be posted",
         );
       }
     }

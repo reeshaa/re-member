@@ -71,6 +71,7 @@ class AuthService extends ChangeNotifier {
         if (response.statusCode == 200) {
           var data = response.data;
           _uid = data['uid'];
+          print(_uid);
           _email = email;
 
           _saveCredentials();
@@ -179,7 +180,7 @@ class AuthService extends ChangeNotifier {
 
   Future<void> _saveCredentials() async {
     await _prefs.setString('authEmail', _email ?? "");
-    await _prefs.setString('authUid', _uid ?? "");
+    await _prefs.setString('authUid', _uid!);
   }
 
   Future<void> _initUserProfile(dynamic data) async {
