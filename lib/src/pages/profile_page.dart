@@ -64,7 +64,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           widget.isAtRoot
                               ? IconButton(
-                                  onPressed: () => Navigator.pop(context),
+                                  onPressed: () => showAboutDialog(
+                                    context: context,
+                                    applicationName: "Re-member App",
+                                    applicationLegalese:
+                                        "Submission to CodeFury 4.0",
+                                  ),
                                   icon: Icon(Icons.info_outline),
                                   iconSize: size.width * 0.07,
                                 )
