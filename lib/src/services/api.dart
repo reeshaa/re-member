@@ -16,7 +16,7 @@ class Api {
   static String get resetPassEndpoint => 'resetpass';
   static String get leaderboardEndpoint => 'leaderboard';
   static String get allCommunitiesEndpoint => 'community/all';
-  static String get profileEndpoint => 'user/O0dtUv8DM2b2qEn7aiFBcfe3KOu2';
+  static String get profileEndpoint => 'user';
   static String get forumQuestionEndpoint => 'forumQuestion';
   Api() {
     options = BaseOptions(
@@ -27,8 +27,8 @@ class Api {
 
   // ignore: non_constant_identifier_names
   Future<Response<dynamic>?> GET(String path) async {
-    debugPrint(baseUrl);
-    debugPrint(path);
+    // debugPrint(baseUrl);
+    // debugPrint(path);
     Response<dynamic>? response;
     try {
       response = await _dio.get(path);

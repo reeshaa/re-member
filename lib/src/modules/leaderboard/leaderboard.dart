@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/modules/leaderboard/models/lb_entry.dart';
+import 'package:re_member/src/pages/profile_page.dart';
 import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
@@ -189,11 +190,18 @@ class LeaderboardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfilePage(uid: entry.uid),
+            ),
+          );
+        },
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         title: Text(entry.displayName),
         leading: CircleAvatar(),
-        trailing: Text(entry.points.toString()),
+        trailing: Text(entry.points.toString() + " LP"),
       ),
     );
   }
