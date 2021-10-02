@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/modules/communities/components/new_question.dart';
 import 'package:re_member/src/modules/communities/discussion.dart';
+import 'package:re_member/src/modules/communities/explore.dart';
 import 'package:re_member/src/modules/communities/model/community.dart';
 import 'package:re_member/src/modules/communities/resources.dart';
 import 'package:re_member/src/services/api.dart';
@@ -155,7 +156,7 @@ class _Communities2State extends State<Communities2>
                         ),
                       ),
                       Tab(
-                        child: Text("SUBTOPICS"),
+                        child: Text("EXPLORE"),
                       ),
                       Tab(
                         child: Text("RESOURCES"),
@@ -169,9 +170,7 @@ class _Communities2State extends State<Communities2>
                 child: TabBarView(
                   children: [
                     Discussion(questions: widget.community.forumQuestions),
-                    Container(
-                      child: Text("lolo"),
-                    ),
+                    Explore(),
                     Resources(),
                   ],
                   controller: tabController,
