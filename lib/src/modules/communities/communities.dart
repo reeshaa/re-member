@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 
 class Communities extends StatefulWidget {
   const Communities({Key? key}) : super(key: key);
@@ -139,94 +139,142 @@ class _CommunitiesState extends State<Communities> {
             ),
           ))
       .toList();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 12, 8, 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: CustomScrollView(
+          slivers: [
+            // SliverToBoxAdapter(
+            //   child: SizedBox(
+            //     height: 25,
+            //   ),
+            // ),
+            SliverAppBar(
+              expandedHeight: 250,
+              floating: true,
+              snap: true,
+              backgroundColor: Colors.white,
+              title: Container(
+                margin: const EdgeInsets.fromLTRB(8, 12, 8, 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(Icons.menu),
+                      iconSize: size.width * 0.08,
+                    ),
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(Icons.notifications),
+                      iconSize: size.width * 0.08,
+                    ),
+                  ],
+                ),
+              ),
+              bottom: InterestsScroll(
+                list: communitySliders,
+              ),
+            ),
+            SliverFillRemaining(
+              child: Column(
                 children: [
-                  IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.menu),
-                    iconSize: size.width * 0.08,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        size.width * 0.05,
+                        size.height * 0.055,
+                        size.width * 0.05,
+                        size.height * 0.03),
+                    child: Text("Discover",
+                        style: TextStyle(
+                            fontSize: size.height * 0.042,
+                            fontWeight: FontWeight.w700)),
                   ),
-                  IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.notifications),
-                    iconSize: size.width * 0.08,
+                  Flexible(
+                    child: ListView(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: size.width * 0.08),
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        children: otherCommunitySliders),
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.03, horizontal: size.width * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Hello Reesha!",
-                          style: TextStyle(
-                              fontSize: size.height * 0.042,
-                              fontWeight: FontWeight.w700)),
-                      Text("Welcome back",
-                          style: TextStyle(
-                            fontSize: size.height * 0.022,
-                          )),
-                    ],
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.amber,
-                    radius: size.width * 0.075,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: size.height * 0.01, horizontal: size.width * 0.05),
-              child: Text(
-                "What topic interests you today?",
-                style: TextStyle(
-                    fontSize: size.width * 0.05, fontStyle: FontStyle.italic),
-              ),
-            ),
-            Container(
-              height: size.height * 0.15,
-              // width: size.width * 0.95,
-              margin: EdgeInsets.only(left: 8),
-              child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  children: communitySliders),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(size.width * 0.05,
-                  size.height * 0.055, size.width * 0.05, size.height * 0.03),
-              child: Text("Discover",
-                  style: TextStyle(
-                      fontSize: size.height * 0.042,
-                      fontWeight: FontWeight.w700)),
-            ),
-            Expanded(
-              child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  children: otherCommunitySliders),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+class InterestsScroll extends StatelessWidget implements PreferredSizeWidget {
+  final List<Widget> list;
+  const InterestsScroll({
+    Key? key,
+    required this.list,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(
+              vertical: size.height * 0.03, horizontal: size.width * 0.05),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Hello Reesha!",
+                    style: TextStyle(
+                      fontSize: size.height * 0.042,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text("Welcome back",
+                      style: TextStyle(
+                        fontSize: size.height * 0.022,
+                      )),
+                ],
+              ),
+              CircleAvatar(
+                backgroundColor: Colors.amber,
+                radius: size.width * 0.075,
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+              vertical: size.height * 0.01, horizontal: size.width * 0.05),
+          child: Text(
+            "What topic interests you today?",
+            style: TextStyle(
+                fontSize: size.width * 0.05, fontStyle: FontStyle.italic),
+          ),
+        ),
+        Container(
+          height: size.height * 0.15,
+          // width: size.width * 0.95,
+          margin: EdgeInsets.only(left: 8),
+          child: ListView(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              children: list),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(300.0);
 }
