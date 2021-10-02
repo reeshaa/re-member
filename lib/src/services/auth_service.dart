@@ -95,7 +95,12 @@ class AuthService extends ChangeNotifier {
         }
       }
     } catch (e) {
-      // return invalidServerResponseFallback(context);
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        text: "Login failed. Please try again later",
+      );
+      return false;
     }
 
     notifyListeners();
