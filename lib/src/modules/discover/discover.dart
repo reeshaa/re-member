@@ -10,7 +10,7 @@ class _DiscoverState extends State<Discover> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+      color: Colors.pink,
     );
   }
 }
