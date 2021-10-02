@@ -11,6 +11,7 @@ environment:
 
 dependencies:
   carousel_slider: ^4.0.0
+  cool_alert: ^1.1.0
   dio: ^4.0.0
   flutter:
     sdk: flutter

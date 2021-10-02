@@ -1,6 +1,7 @@
 // ignore: non_constant_identifier_names
 import 'package:get_it/get_it.dart';
 import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/userService.dart';
 
 // ignore:non_constant_identifier_names
 final ServiceLocator = GetIt.instance;
@@ -9,4 +10,5 @@ final ServiceLocator = GetIt.instance;
 ///  between UI and API layers
 void setup() {
   ServiceLocator.registerSingleton<Api>(Api());
+  ServiceLocator.registerSingleton<UserService>(UserService());
 }

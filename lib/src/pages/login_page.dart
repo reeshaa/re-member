@@ -49,64 +49,27 @@ class _LoginPageState extends State<LoginPage> {
 
   _attemptRegister(String _email, String _password, String _name) async {
     Provider.of<AuthService>(context, listen: false)
-        .register(context, _email, _password, _name);
+        .register(context, _email, _password, _name)
+        .then((success) {
+      if (!success && this.mounted) {
+        this.setState(() {
+          isLoading = false;
+        });
+      }
+    });
   }
 
   _attemptLogin(String _email, String _password) async {
     Provider.of<AuthService>(context, listen: false)
-        .attemptLogin(context, 'xx', 'yy');
-    return;
-    var postobj = {
-      "email": _email,
-      "pass": _password,
-    };
-    String message = '';
-    Response? response;
-    var respobj;
-    try {
-      response = await ServiceLocator<Api>().POST(Api.loginEndpoint, postobj);
-      respobj = json.decode(response?.data);
-      message = respobj["message"] ?? "Null";
-    } catch (e) {
-      print("Caught Exception");
-    }
-
-    if (message == "loggedIn") {
-      var user = json.encode(respobj["user"]);
-      // String _authToken = response.headers;
-
-      // await _saveDetails(_authToken, user);
-      // print("Logged in Successfully: $user");
-      // Navigator.pushReplacement(
-      //     context, new MaterialPageRoute(builder: (context) => LandingPage()));
-    } else if (message == "Invalid_Password") {
-      // showtoast("Incorrect Password");
-      print("Invalid password");
-    } else if (message == "Invalid_EmailId") {
-      isLoading = false;
-
-      // showtoast("There is no account with us for this email address");
-    } else {
-      // showtoast("Please try again later !");
-    }
-    setState(() {
-      isLoading = false;
+        .attemptLogin(context, _email, _password)
+        .then((success) {
+      if (!success && this.mounted) {
+        this.setState(() {
+          isLoading = false;
+        });
+      }
     });
   }
-
-  // showtoast(String text) => .showSnackBar(
-  //       SnackBar(
-  //         content: Text(text),
-  //         elevation: 5,
-  //         shape: RoundedRectangleBorder(
-  //           borderRadius: BorderRadius.all(
-  //             Radius.circular(30),
-  //           ),
-  //         ),
-  //         backgroundColor: Colors.red,
-  //         behavior: SnackBarBehavior.floating,
-  //       ),
-  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -183,10 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(12),
-                              child: SvgPicture.asset(
-                                "assets/Mail.svg",
-                                color: Colors.grey[900],
-                              ),
+                              child: Icon(Icons.email_rounded),
                             ),
                           ),
                         )),
@@ -207,8 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                           floatingLabelBehavior: FloatingLabelBehavior.auto,
                           prefixIcon: Padding(
                             padding: EdgeInsets.all(12),
-                            child: SvgPicture.asset("assets/Lock.svg",
-                                color: Colors.grey[900]),
+                            child: Icon(Icons.lock),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.only(
@@ -228,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: true,
                           validator: (value) {
                             if (value?.isEmpty ?? false) {
-                              return "Password cannot be empty";
+                              return "Please enter your name";
                             }
 
                             return null;
@@ -238,8 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
                             prefixIcon: Padding(
                               padding: EdgeInsets.all(12),
-                              child: SvgPicture.asset("assets/Lock.svg",
-                                  color: Colors.grey[900]),
+                              child: Icon(Icons.account_circle),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
@@ -259,7 +217,9 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         TextButton(
                           child: Text(
-                            "New here? Register now",
+                            (isRegisterMode)
+                                ? "Existing user? Login instead"
+                                : "New here? Register now",
                             style: TextStyle(
                                 fontSize: regularfont * 0.69,
                                 fontWeight: FontWeight.w600,
