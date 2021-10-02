@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-class MyHomePage extends StatefulWidget {
- 
-
+class Resources extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ResourcesState createState() => _ResourcesState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ResourcesState extends State<Resources> {
   Future<void>? _launched;
   String _phone = '';
 
@@ -104,34 +101,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     const String toLaunch = 'https://www.wwe.com/';
     return Scaffold(
-      
       body: ListView(
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-            
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ),
-              
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ),
-              
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ),
-              
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInBrowser(toLaunch);
@@ -144,61 +118,72 @@ class _MyHomePageState extends State<MyHomePage> {
                 }),
                 child: const Text('wwe'),
               ),
-              
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInBrowser(toLaunch);
                 }),
                 child: const Text('wwe'),
               ),
-              
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInBrowser(toLaunch);
                 }),
                 child: const Text('wwe'),
               ),
-              
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInBrowser(toLaunch);
                 }),
                 child: const Text('wwe'),
               ),
-              
-             
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ), 
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ), 
-              ElevatedButton(
-                onPressed: () => setState(() {
-                  _launched = _launchInBrowser(toLaunch);
-                }),
-                child: const Text('wwe'),
-              ), 
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInBrowser(toLaunch);
                 }),
                 child: const Text('wwe'),
               ),
-              
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInBrowser(toLaunch);
                 }),
                 child: const Text('wwe'),
               ),
-              
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('wwe'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('wwe'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('wwe'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('wwe'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('wwe'),
+              ),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInBrowser(toLaunch);
+                }),
+                child: const Text('wwe'),
+              ),
               const Padding(padding: EdgeInsets.all(16.0)),
               Link(
                 uri: Uri.parse(
