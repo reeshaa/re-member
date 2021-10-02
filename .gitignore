@@ -9,6 +9,9 @@
 .history
 .svn/
 
+# Ignore playground
+/lib/playground
+
 # IntelliJ related
 *.iml
 *.ipr
