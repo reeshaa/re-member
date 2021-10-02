@@ -34,41 +34,43 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.circular(25),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: borderRadiusLarge,
-          ),
-          margin: const EdgeInsets.all(8.0),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.do_not_disturb_on_outlined),
-              //   label: 'Focus',
-              // ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard_rounded),
-                label: 'Dashboard',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Discover',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.leaderboard_rounded),
-                label: 'Leaderboard',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Profile',
-              ),
-            ], // showUnselectedLabels: true,
-            onTap: _onItemTapped,
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: borderRadiusLarge,
+            ),
+            margin: const EdgeInsets.all(8.0),
+            child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.do_not_disturb_on_outlined),
+                //   label: 'Focus',
+                // ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.dashboard_rounded),
+                  label: 'Dashboard',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  label: 'Discover',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.leaderboard_rounded),
+                  label: 'Leaderboard',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle),
+                  label: 'Profile',
+                ),
+              ], // showUnselectedLabels: true,
+              onTap: _onItemTapped,
+            ),
           ),
         ),
       ),
