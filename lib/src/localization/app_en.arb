@@ -1,0 +1,6 @@
+{
+  "appTitle": "re_member",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
