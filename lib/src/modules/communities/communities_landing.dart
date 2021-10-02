@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:re_member/src/Pages/profile_page.dart';
 import 'package:re_member/src/modules/communities/community_detailed.dart';
 import 'package:re_member/src/modules/communities/model/community.dart';
 import 'package:re_member/src/services/api.dart';
@@ -307,7 +308,7 @@ class InterestsScroll extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hello " + (ServiceLocator<UserService>().name ?? "Anonymous"),
+                "Hello " + (ServiceLocator<UserService>().name ?? "Learner"),
                 style: TextStyle(
                   fontSize: size.height * 0.042,
                   fontWeight: FontWeight.w700,
@@ -320,9 +321,17 @@ class InterestsScroll extends StatelessWidget {
                   )),
             ],
           ),
-          CircleAvatar(
-            backgroundColor: Colors.amber,
-            radius: size.width * 0.075,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.amber,
+              radius: size.width * 0.075,
+            ),
           )
         ],
       ),

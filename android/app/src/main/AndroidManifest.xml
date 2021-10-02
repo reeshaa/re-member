@@ -1,5 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.re_member">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+  <!-- Provide required visibility configuration for API level 30 and above -->
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <data android:scheme="https" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.DIAL" />
+      <data android:scheme="tel" />
+    </intent>
+  </queries>
+
    <application
         android:label="re_member"
         android:icon="@mipmap/ic_launcher">

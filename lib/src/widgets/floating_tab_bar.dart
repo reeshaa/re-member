@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:re_member/src/configs/palette.dart';
-import 'package:re_member/src/utils/border_radii.dart';
+import 'package:re_member/src/utils/constants.dart';
 
 class FloatingTabBar extends StatelessWidget implements PreferredSizeWidget {
   const FloatingTabBar({

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:re_member/src/configs/palette.dart';
+import 'package:re_member/src/modules/communities/components/new_question.dart';
 import 'package:re_member/src/modules/communities/discussion.dart';
 import 'package:re_member/src/modules/communities/model/community.dart';
+import 'package:re_member/src/modules/communities/resources.dart';
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
 
 class Communities2 extends StatefulWidget {
@@ -14,9 +16,15 @@ class Communities2 extends StatefulWidget {
 
 class _Communities2State extends State<Communities2>
     with SingleTickerProviderStateMixin {
-  late final blah = TabController(length: 3, vsync: this);
+  late final tabController = TabController(length: 3, vsync: this);
+
+  var activeTabIndex = 0;
   @override
   void initState() {
+    tabController.addListener(() {
+      print("Called");
+      setState(() => activeTabIndex = tabController.index);
+    });
     super.initState();
   }
 
@@ -113,10 +121,10 @@ class _Communities2State extends State<Communities2>
                         child: Text("SUBTOPICS"),
                       ),
                       Tab(
-                        child: Text("COMMUNITY"),
+                        child: Text("RESOURCES"),
                       )
                     ],
-                    tabController: blah,
+                    tabController: tabController,
                   ),
                 ),
               ),
@@ -127,26 +135,45 @@ class _Communities2State extends State<Communities2>
                     Container(
                       child: Text("lolo"),
                     ),
-                    Container(
-                      child: Text("NONO"),
-                    )
+                    Resources(),
                   ],
-                  controller: blah,
+                  controller: tabController,
                 ),
               )
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => print("Hello"),
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => NewQuestion(),
+            ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
             backgroundColor: Palette.selectedTab,
             label: Row(
               children: [
-                Icon(Icons.question_answer_outlined),
+                Builder(builder: (context) {
+                  switch (activeTabIndex) {
+                    case 0:
+                      return Icon(Icons.question_answer_outlined);
+                    case 1:
+                      return Icon(Icons.list_alt_rounded);
+                    default:
+                      return Icon(Icons.upload_file);
+                  }
+                }),
                 SizedBox(width: 10),
-                Text("Ask"),
+                Builder(builder: (context) {
+                  switch (activeTabIndex) {
+                    case 0:
+                      return Text("Ask");
+                    case 1:
+                      return Text("Create");
+                    default:
+                      return Text("Add");
+                  }
+                }),
               ],
             ),
           ),
