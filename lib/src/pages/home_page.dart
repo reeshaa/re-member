@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:re_member/src/modules/communities/communities.dart';
+import 'package:re_member/src/modules/communities/communities2.dart';
 import 'package:re_member/src/modules/discover/discover.dart';
 import 'package:re_member/src/modules/focus_mode/focus.dart';
 import 'package:re_member/src/modules/leaderboard/leaderboard.dart';
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
   static const List<Widget> _widgetOptions = <Widget>[
     FocusMode(),
     Discover(),
-    Communities(),
+    Communities2(),
     Setting(),
     LeaderBoard()
   ];
