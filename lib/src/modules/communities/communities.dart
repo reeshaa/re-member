@@ -96,7 +96,13 @@ class _CommunitiesState extends State<Communities> {
       .toList();
 
   List<Widget> otherCommunitySliders() => communities!
-      .map((item) => Container(
+      .map((item) => GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Communities2()),
+              );
+            },
             child: Container(
               margin: EdgeInsets.all(10.0),
               child: ClipRRect(
