@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 class Palette {
-  static const color1 = Color(0xFFEF321F);
-  static const inactiveText = Color(0xFFFFF112);
+  static const selectedTab = Color(0xCE009900);
+  static const inactiveText = Color(0xFFA1A1A1);
 }

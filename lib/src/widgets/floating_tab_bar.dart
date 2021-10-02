@@ -38,8 +38,8 @@ class FloatingTabBar extends StatelessWidget implements PreferredSizeWidget {
         decoration: BoxDecoration(
           color: Colors.grey[50],
           border: Border.all(
-            color: Palette.color1,
-            width: 0.75,
+            color: Colors.black54,
+            width: 0.5,
           ),
           borderRadius: borderRadiusLarge,
         ),
@@ -49,7 +49,8 @@ class FloatingTabBar extends StatelessWidget implements PreferredSizeWidget {
           unselectedLabelColor: Palette.inactiveText,
           indicatorSize: TabBarIndicatorSize.tab,
           indicator: BoxDecoration(
-            color: Palette.color1,
+            color: Palette.selectedTab,
+            borderRadius: borderRadiusLarge,
           ),
           labelColor: Colors.white,
           labelStyle: TextStyle(fontWeight: FontWeight.normal),
