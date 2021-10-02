@@ -64,7 +64,7 @@ class _CommunitiesLandingState extends State<CommunitiesLanding> {
                     child: Stack(
                       children: <Widget>[
                         Image.network(item.imageURL,
-                            fit: BoxFit.fitHeight, width: 150),
+                            fit: BoxFit.cover, width: 150),
                         Positioned(
                           bottom: 0.0,
                           left: 0.0,
