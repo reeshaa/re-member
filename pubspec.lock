@@ -43,6 +43,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+<<<<<<< HEAD
   dio:
     dependency: "direct main"
     description:
@@ -50,6 +51,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+=======
+>>>>>>> origin/sharon
   fake_async:
     dependency: transitive
     description:
@@ -57,6 +60,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+<<<<<<< HEAD
   ffi:
     dependency: transitive
     description:
@@ -71,6 +75,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+=======
+>>>>>>> origin/sharon
   flutter:
     dependency: "direct main"
     description: flutter
@@ -81,6 +87,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_svg:
     dependency: "direct main"
     description:
@@ -88,11 +95,14 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.22.0"
+=======
+>>>>>>> origin/sharon
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -112,6 +122,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+=======
+>>>>>>> origin/sharon
   intl:
     dependency: transitive
     description:
@@ -119,6 +131,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+<<<<<<< HEAD
   js:
     dependency: transitive
     description:
@@ -126,6 +139,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+=======
+>>>>>>> origin/sharon
   matcher:
     dependency: transitive
     description:
@@ -147,6 +162,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+<<<<<<< HEAD
   path_drawing:
     dependency: transitive
     description:
@@ -259,6 +275,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+=======
+>>>>>>> origin/sharon
   sky_engine:
     dependency: transitive
     description: flutter
@@ -320,6 +338,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+<<<<<<< HEAD
   win32:
     dependency: transitive
     description:
@@ -344,3 +363,7 @@ packages:
 sdks:
   dart: ">=2.14.0 <3.0.0"
   flutter: ">=2.5.0"
+=======
+sdks:
+  dart: ">=2.12.0 <3.0.0"
+>>>>>>> origin/sharon
