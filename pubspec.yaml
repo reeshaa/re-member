@@ -13,17 +13,21 @@ dependencies:
   carousel_slider: ^4.0.0
   cool_alert: ^1.1.0
   dio: ^4.0.0
+  firebase_core: ^1.7.0
+  firebase_messaging: ^10.0.8
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^8.2.0
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^0.22.0
   get_it: ^7.2.0
-  google_fonts: ^2.1.0
   jwt_decode: ^0.3.1
   persistent_bottom_nav_bar: ^4.0.2
   provider: ^6.0.1
   shared_preferences: ^2.0.8
+  cached_network_image: ^3.1.0
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:
