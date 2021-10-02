@@ -3,6 +3,7 @@ import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/modules/communities/components/new_question.dart';
 import 'package:re_member/src/modules/communities/discussion.dart';
 import 'package:re_member/src/modules/communities/model/community.dart';
+import 'package:re_member/src/modules/communities/resources.dart';
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
 
 class Communities2 extends StatefulWidget {
@@ -120,7 +121,7 @@ class _Communities2State extends State<Communities2>
                         child: Text("SUBTOPICS"),
                       ),
                       Tab(
-                        child: Text("COMMUNITY"),
+                        child: Text("RESOURCES"),
                       )
                     ],
                     tabController: tabController,
@@ -134,9 +135,7 @@ class _Communities2State extends State<Communities2>
                     Container(
                       child: Text("lolo"),
                     ),
-                    Container(
-                      child: Text("NONO"),
-                    )
+                    Resources(),
                   ],
                   controller: tabController,
                 ),
