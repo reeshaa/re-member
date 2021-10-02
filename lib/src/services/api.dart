@@ -63,7 +63,7 @@ class Api {
         data: body,
         options: Options(
           headers: <String, dynamic>{
-            'uid': ServiceLocator<UserService>().uid,
+            'uid': ServiceLocator<UserService>().uid ?? "",
           },
         ),
       );
