@@ -11,6 +11,7 @@ class Api {
   // Getters for API end-points
   static String get loginEndpoint => 'login';
   static String get registerEndpoint => 'register';
+  static String get resetPassEndpoint => 'resetpass';
   static String get leaderboardEndpoint => 'leaderboard';
   static String get allCommunitiesEndpoint => 'community/all';
   Api() {

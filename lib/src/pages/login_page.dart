@@ -1,13 +1,8 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/auth_service.dart';
-import 'package:re_member/src/services/service_locator.dart';
+import 'package:re_member/src/widgets/reset_password.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -121,6 +116,36 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: size.height * 0.04,
                     ),
+                    Visibility(
+                      visible: isRegisterMode,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 15, 40, 20),
+                        child: TextFormField(
+                          controller: nameController,
+                          validator: (value) {
+                            if (value?.isEmpty ?? false) {
+                              return "Please enter your name";
+                            }
+
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: "Name",
+                            floatingLabelBehavior: FloatingLabelBehavior.auto,
+                            prefixIcon: Padding(
+                              padding: EdgeInsets.all(12),
+                              child: Icon(Icons.account_circle),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(30),
+                                  bottomRight: Radius.circular(30)),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     Padding(
                         padding: EdgeInsets.only(bottom: 15, right: 40),
                         child: TextFormField(
@@ -151,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         )),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 15, 40, 0),
+                      padding: EdgeInsets.fromLTRB(0, 05, 40, 0),
                       child: TextFormField(
                         controller: passwordController,
                         obscureText: true,
@@ -174,37 +199,6 @@ class _LoginPageState extends State<LoginPage> {
                                 topRight: Radius.circular(30),
                                 bottomRight: Radius.circular(30)),
                             borderSide: BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: isRegisterMode,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 15, 40, 0),
-                        child: TextFormField(
-                          controller: nameController,
-                          obscureText: true,
-                          validator: (value) {
-                            if (value?.isEmpty ?? false) {
-                              return "Please enter your name";
-                            }
-
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            labelText: "Name",
-                            floatingLabelBehavior: FloatingLabelBehavior.auto,
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(12),
-                              child: Icon(Icons.account_circle),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(30),
-                                  bottomRight: Radius.circular(30)),
-                              borderSide: BorderSide(color: Colors.grey),
-                            ),
                           ),
                         ),
                       ),
@@ -266,6 +260,18 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ],
+                    ),
+                    TextButton(
+                      child: Text(
+                        (isRegisterMode) ? "" : "Forgot password?",
+                        style: TextStyle(
+                            fontSize: regularfont * 0.69,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey[700]),
+                      ),
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) => ResetPassword()),
                     ),
                   ],
                 ),
