@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:re_member/src/modules/communities/model/forum_question.dart';
 
 class Community {
   final String communityDescription;
@@ -106,87 +107,5 @@ class Community {
         participantsCount.hashCode ^
         subtopics.hashCode ^
         resources.hashCode;
-  }
-}
-
-class ForumQuestion {
-  final String communityId;
-  final String ownerUid;
-  final String postedBy;
-  final String qid;
-  final String question;
-  ForumQuestion({
-    required this.communityId,
-    required this.ownerUid,
-    required this.postedBy,
-    required this.qid,
-    required this.question,
-  });
-
-  ForumQuestion copyWith({
-    String? communityId,
-    String? ownerUid,
-    String? postedBy,
-    String? qid,
-    String? question,
-  }) {
-    return ForumQuestion(
-      communityId: communityId ?? this.communityId,
-      ownerUid: ownerUid ?? this.ownerUid,
-      postedBy: postedBy ?? this.postedBy,
-      qid: qid ?? this.qid,
-      question: question ?? this.question,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'communityId': communityId,
-      'ownerUid': ownerUid,
-      'postedBy': postedBy,
-      'qid': qid,
-      'question': question,
-    };
-  }
-
-  factory ForumQuestion.fromMap(Map<String, dynamic> map) {
-    return ForumQuestion(
-      communityId: map['communityId'],
-      ownerUid: map['ownerUid'],
-      postedBy: map['postedBy'],
-      qid: map['qid'],
-      question: map['question'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ForumQuestion.fromJson(String source) =>
-      ForumQuestion.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'ForumQuestion(communityId: $communityId, ownerUid: $ownerUid, postedBy: $postedBy, qid: $qid, question: $question)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is ForumQuestion &&
-        other.communityId == communityId &&
-        other.ownerUid == ownerUid &&
-        other.postedBy == postedBy &&
-        other.qid == qid &&
-        other.question == question;
-  }
-
-  @override
-  int get hashCode {
-    return communityId.hashCode ^
-        ownerUid.hashCode ^
-        postedBy.hashCode ^
-        qid.hashCode ^
-        question.hashCode;
   }
 }

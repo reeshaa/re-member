@@ -24,7 +24,6 @@ dependencies:
   persistent_bottom_nav_bar: ^4.0.2
   provider: ^6.0.1
   shared_preferences: ^2.0.8
-  shelf: ^1.2.0
 
 dev_dependencies:
   flutter_test:

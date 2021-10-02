@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:re_member/src/configs/palette.dart';
+import 'package:re_member/src/modules/leaderboard/models/lb_entry.dart';
+import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
 
 class LeaderBoard extends StatefulWidget {
@@ -11,11 +15,27 @@ class LeaderBoard extends StatefulWidget {
 class _LeaderBoardState extends State<LeaderBoard>
     with SingleTickerProviderStateMixin {
   bool isChecked = false;
-  late final blah;
+  late final tabController;
+  List<LB_Entry>? entries;
+
+  bool isLoading = true;
   @override
   void initState() {
-    blah = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
+    _getData();
     super.initState();
+  }
+
+  _getData() async {
+    var data = await ServiceLocator<Api>().GET(Api.leaderboardEndpoint);
+    if (data != null && data.statusCode == 200) {
+      entries = data.data["leaderboard"]
+          .map<LB_Entry>((a) => LB_Entry.fromMap(a))
+          .toList();
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -44,7 +64,7 @@ class _LeaderBoardState extends State<LeaderBoard>
               children: [
                 IconButton(
                   onPressed: null,
-                  icon: Icon(Icons.arrow_back_ios),
+                  icon: Icon(Icons.menu),
                   iconSize: size.width * 0.07,
                 ),
                 IconButton(
@@ -83,7 +103,7 @@ class _LeaderBoardState extends State<LeaderBoard>
                       Tab(child: Text("This Month")),
                       Tab(text: "All Time")
                     ],
-                    tabController: blah,
+                    tabController: tabController,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -113,80 +133,31 @@ class _LeaderBoardState extends State<LeaderBoard>
                       borderRadius: BorderRadius.circular(15),
                       color: Colors.grey[100],
                     ),
-                    child: TabBarView(
-                      children: [
-                        Container(
-                          child: ListView(
-                            padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                            physics: BouncingScrollPhysics(),
-                            children: [
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                            ],
+                    child: isLoading || entries == null
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: Palette.selectedTab,
+                            ),
+                          )
+                        : TabBarView(
+                            children: List.generate(
+                              3,
+                              (i) => Container(
+                                child: ListView(
+                                  padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                  physics: BouncingScrollPhysics(),
+                                  children: entries!
+                                      .map(
+                                        (e) => LeaderboardCard(
+                                          entry: e,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+                            ),
+                            controller: tabController,
                           ),
-                        ),
-                        Container(
-                          child: ListView(
-                            padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                            physics: BouncingScrollPhysics(),
-                            children: [
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: ListView(
-                            padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                            physics: BouncingScrollPhysics(),
-                            children: [
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                              LeaderboardCard(),
-                            ],
-                          ),
-                        ),
-                      ],
-                      controller: blah,
-                    ),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
@@ -211,17 +182,18 @@ class _LeaderBoardState extends State<LeaderBoard>
 class LeaderboardCard extends StatelessWidget {
   const LeaderboardCard({
     Key? key,
+    required this.entry,
   }) : super(key: key);
-
+  final LB_Entry entry;
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         onTap: () {},
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        title: Text("Name"),
+        title: Text(entry.displayName),
         leading: CircleAvatar(),
-        trailing: Text("1123 LP"),
+        trailing: Text(entry.points.toString()),
       ),
     );
   }
