@@ -24,9 +24,6 @@ class _Communities2State extends State<Communities2>
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("science"),
-        ),
         body: Column(
           children: <Widget>[
             Padding(
@@ -49,17 +46,20 @@ class _Communities2State extends State<Communities2>
             ),
             SizedBox(
               height: 20,
-              child: TabBarView(children: [
-                Container(
-                  child: Text("KOKO"),
-                ),
-                Container(
-                  child: Text("lolo"),
-                ),
-                Container(
-                  child: Text("NONO"),
-                )
-              ],controller: blah,),
+              child: TabBarView(
+                children: [
+                  Container(
+                    child: Text("KOKO"),
+                  ),
+                  Container(
+                    child: Text("lolo"),
+                  ),
+                  Container(
+                    child: Text("NONO"),
+                  )
+                ],
+                controller: blah,
+              ),
             )
           ],
         ),
