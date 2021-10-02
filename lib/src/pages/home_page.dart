@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:re_member/src/Pages/discover.dart';
-import 'package:re_member/src/Pages/focus.dart';
-import 'package:re_member/src/Pages/leaderboard.dart';
-import 'package:re_member/src/Pages/setting.dart';
+
 import 'package:re_member/src/modules/communities/communities.dart';
+import 'package:re_member/src/modules/discover/discover.dart';
+import 'package:re_member/src/modules/focus_mode/focus.dart';
+import 'package:re_member/src/modules/leaderboard/leaderboard.dart';
+import 'package:re_member/src/modules/settings/setting.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class Home extends StatefulWidget {
@@ -44,7 +45,7 @@ class _HomeState extends State<Home> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'discover',
+            label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
