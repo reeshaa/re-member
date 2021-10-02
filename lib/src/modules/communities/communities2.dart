@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:re_member/src/modules/communities/discussion.dart';
+import 'package:re_member/src/modules/communities/resources.dart';
 import 'package:re_member/src/modules/discover/discover.dart';
 
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
@@ -40,23 +41,21 @@ class _Communities2State extends State<Communities2>
                     child: Text("SUBTOPICS"),
                   ),
                   Tab(
-                    child: Text("COMMUNITY"),
+                    child: Text("RESOURCES"),
                   )
                 ], tabController: blah),
               ),
             ),
             SafeArea(
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * .7,
+                height: MediaQuery.of(context).size.height * .75,
                 child: TabBarView(
                   children: [
                     Discussion(),
                     Container(
                       child: Text("lolo"),
                     ),
-                    Container(
-                      child: Text("NONO"),
-                    )
+                    MyHomePage(),
                   ],
                   controller: blah,
                 ),
