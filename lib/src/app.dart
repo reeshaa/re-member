@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         restorationScopeId: 'app',
         // darkTheme: ThemeData.dark(),
         // themeMode: settingsController.themeMode,
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(), //TODO: CHOSE FONT
         ),
