@@ -18,6 +18,7 @@ class Api {
   static String get allCommunitiesEndpoint => 'community/all';
   static String get profileEndpoint => 'user';
   static String get forumQuestionEndpoint => 'forumQuestion';
+  static String get forumAddAnswerEndpoint => 'forumQuestion/addAnswer';
   Api() {
     options = BaseOptions(
       baseUrl: baseUrl,

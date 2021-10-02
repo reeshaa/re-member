@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/modules/communities/communities.dart';
 import 'package:re_member/src/modules/discover/discover.dart';
-import 'package:re_member/src/modules/focus_mode/focus.dart';
 import 'package:re_member/src/modules/leaderboard/leaderboard.dart';
-import 'package:re_member/src/modules/settings/settings.dart';
 import 'package:re_member/src/pages/profile_page.dart';
 import 'package:re_member/src/utils/constants.dart';
 
@@ -58,7 +57,7 @@ class _HomeState extends State<Home> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.search),
-                  label: 'Discover',
+                  label: 'Connect',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.leaderboard_rounded),
@@ -68,8 +67,10 @@ class _HomeState extends State<Home> {
                   icon: Icon(Icons.account_circle),
                   label: 'Profile',
                 ),
-              ], // showUnselectedLabels: true,
+              ],
               onTap: _onItemTapped,
+              selectedItemColor: Palette.selectedTab,
+              unselectedItemColor: Colors.grey,
             ),
           ),
         ),

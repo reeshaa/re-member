@@ -83,7 +83,7 @@ class _DiscoverState extends State<Discover>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Discover",
+                Text("Connect",
                     style: TextStyle(
                         fontSize: size.height * 0.042,
                         fontWeight: FontWeight.w700)),
@@ -120,8 +120,7 @@ class _DiscoverState extends State<Discover>
                           child: ListView(
                             children: [
                               Column(children: <Widget>[
-                              
-                               Padding(
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -176,7 +175,8 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ), Padding(
+                                ),
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -231,7 +231,8 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ), Padding(
+                                ),
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -286,7 +287,8 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ), Padding(
+                                ),
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -341,7 +343,8 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ), Padding(
+                                ),
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -396,7 +399,8 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ), Padding(
+                                ),
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -451,7 +455,8 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ), Padding(
+                                ),
+                                Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
