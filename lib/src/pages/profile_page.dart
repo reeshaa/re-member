@@ -3,12 +3,13 @@ import 'package:re_member/src/Pages/models/profile_entry.dart';
 import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/services/api.dart';
 import 'package:re_member/src/services/service_locator.dart';
+import 'package:re_member/src/services/userService.dart';
 import 'package:re_member/src/utils/constants.dart';
 import 'package:re_member/src/widgets/AchievementCard.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
-
+  ProfilePage({Key? key, this.uid}) : super(key: key);
+  final String? uid;
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -24,7 +25,9 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _getData() async {
-    var data = await ServiceLocator<Api>().GET(Api.profileEndpoint);
+    var _uid = widget.uid ?? (ServiceLocator<UserService>().uid ?? "");
+    var data =
+        await ServiceLocator<Api>().GET(Api.profileEndpoint + '/' + _uid);
     if (data != null && data.statusCode == 200) {
       entry = Profile_Entry.fromMap(data.data);
     }
@@ -83,19 +86,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                         fontSize: size.height * 0.042,
                                         fontWeight: FontWeight.w700)),
                                 SizedBox(height: 12),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Column(children: [
-                                      Text("706"),
-                                      Text("Followers")
-                                    ]),
-                                    SizedBox(width: 30),
-                                    Column(children: [
-                                      Text("702"),
-                                      Text("Following")
-                                    ]),
-                                  ],
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Column(children: [
+                                        Text("706"),
+                                        Text(
+                                          "Followers",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ]),
+                                      SizedBox(width: 30),
+                                      Column(children: [
+                                        Text("702"),
+                                        Text(
+                                          "Following",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )
+                                      ]),
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
@@ -106,12 +123,15 @@ class _ProfilePageState extends State<ProfilePage> {
                               CircleAvatar(
                                   backgroundColor: Colors.amber,
                                   radius: size.width * 0.1),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 30,
-                                  color: Colors.grey,
+                              Visibility(
+                                visible: widget.uid == null,
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.edit,
+                                    size: 30,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               )
                             ],

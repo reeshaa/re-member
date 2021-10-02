@@ -37,42 +37,46 @@ class _HomeState extends State<Home> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: borderRadiusLarge,
-        ),
-        margin: const EdgeInsets.all(8.0),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.do_not_disturb_on_outlined),
-              label: 'Focus',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Discover',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.leaderboard_rounded),
-              label: 'Leaderboard',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'settings',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
-          unselectedItemColor: Colors.grey[600],
-          unselectedLabelStyle: TextStyle(
-            color: Colors.grey[600],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.circular(25),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: borderRadiusLarge,
           ),
-          // showUnselectedLabels: true,
-          onTap: _onItemTapped,
+          margin: const EdgeInsets.all(8.0),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.red,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.do_not_disturb_on_outlined),
+                label: 'Focus',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Discover',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.leaderboard_rounded),
+                label: 'Leaderboard',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: 'settings',
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.amber[800],
+            unselectedItemColor: Colors.grey[600],
+            unselectedLabelStyle: TextStyle(
+              color: Colors.grey[600],
+            ),
+            // showUnselectedLabels: true,
+            onTap: _onItemTapped,
+          ),
         ),
       ),
     );
