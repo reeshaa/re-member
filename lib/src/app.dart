@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:re_member/src/root.dart';
 import 'package:re_member/src/services/auth_service.dart';
@@ -27,9 +28,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         restorationScopeId: 'app',
-        theme: ThemeData(),
-        darkTheme: ThemeData.dark(),
+        // darkTheme: ThemeData.dark(),
         // themeMode: settingsController.themeMode,
+        theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(), //TODO: CHOSE FONT
+        ),
         home: Root().getHome(),
       ),
     );
