@@ -13,8 +13,11 @@ dependencies:
   carousel_slider: ^4.0.0
   cool_alert: ^1.1.0
   dio: ^4.0.0
+  firebase_core: ^1.7.0
+  firebase_messaging: ^10.0.8
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^8.2.0
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^0.22.0
