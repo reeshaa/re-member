@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:re_member/src/Pages/models/profile_entry.dart';
 import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/auth_service.dart';
 import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/services/userService.dart';
 import 'package:re_member/src/utils/constants.dart';
 import 'package:re_member/src/widgets/AchievementCard.dart';
+import 'package:re_member/src/widgets/avatar.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key, this.uid}) : super(key: key);
+  const ProfilePage({Key? key, this.uid, this.isAtRoot = false})
+      : super(key: key);
   final String? uid;
+  final bool isAtRoot;
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -56,14 +62,22 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          widget.isAtRoot
+                              ? IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: Icon(Icons.info_outline),
+                                  iconSize: size.width * 0.07,
+                                )
+                              : IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: Icon(Icons.arrow_back_ios),
+                                  iconSize: size.width * 0.07,
+                                ),
                           IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: Icon(Icons.arrow_back_ios),
-                            iconSize: size.width * 0.07,
-                          ),
-                          IconButton(
-                            onPressed: null,
-                            icon: Icon(Icons.notifications),
+                            onPressed: () =>
+                                Provider.of<AuthService>(context, listen: false)
+                                    .signout(),
+                            icon: Icon(Icons.exit_to_app_rounded),
                             iconSize: size.width * 0.08,
                           ),
                         ],
@@ -120,9 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           Stack(
                             alignment: Alignment(1.5, -1.5),
                             children: [
-                              CircleAvatar(
-                                  backgroundColor: Colors.amber,
-                                  radius: size.width * 0.1),
+                              Avatar(size: size),
                               Visibility(
                                 visible: widget.uid == null,
                                 child: IconButton(
