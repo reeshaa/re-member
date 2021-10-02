@@ -13,7 +13,7 @@ class Centeral extends StatefulWidget {
 
 /// This is the private State class that goes with Center.
 class _CenteralState extends State<Centeral> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -44,7 +44,7 @@ class _CenteralState extends State<Centeral> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'discover',
+            label: 'Discover',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
