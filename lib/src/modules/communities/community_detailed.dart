@@ -1,9 +1,13 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:re_member/src/configs/palette.dart';
 import 'package:re_member/src/modules/communities/components/new_question.dart';
 import 'package:re_member/src/modules/communities/discussion.dart';
+import 'package:re_member/src/modules/communities/explore.dart';
 import 'package:re_member/src/modules/communities/model/community.dart';
 import 'package:re_member/src/modules/communities/resources.dart';
+import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/widgets/floating_tab_bar.dart';
 
 class Communities2 extends StatefulWidget {
@@ -22,10 +26,44 @@ class _Communities2State extends State<Communities2>
   @override
   void initState() {
     tabController.addListener(() {
-      print("Called");
       setState(() => activeTabIndex = tabController.index);
     });
     super.initState();
+  }
+
+  _postNewQuestion() async {
+    var message = await showDialog(
+      context: context,
+      builder: (context) => NewQuestion(),
+    );
+
+    if (message == null || message!.isEmpty)
+      return;
+    else {
+      var body = <String, dynamic>{
+        "question": message,
+        "communityId": widget.community.communityId,
+      };
+      var response =
+          await ServiceLocator<Api>().POST(Api.forumQuestionEndpoint, body);
+
+      if (response != null && response.statusCode == 200) {
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.success,
+          confirmBtnText: "Yayy !",
+          title: "Your question has been posted !",
+          text: response.data["message"],
+        );
+      } else {
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          confirmBtnText: "Okay",
+          title: "Question could not be posted",
+        );
+      }
+    }
   }
 
   @override
@@ -118,7 +156,7 @@ class _Communities2State extends State<Communities2>
                         ),
                       ),
                       Tab(
-                        child: Text("SUBTOPICS"),
+                        child: Text("EXPLORE"),
                       ),
                       Tab(
                         child: Text("RESOURCES"),
@@ -132,9 +170,7 @@ class _Communities2State extends State<Communities2>
                 child: TabBarView(
                   children: [
                     Discussion(questions: widget.community.forumQuestions),
-                    Container(
-                      child: Text("lolo"),
-                    ),
+                    Explore(),
                     Resources(),
                   ],
                   controller: tabController,
@@ -143,10 +179,7 @@ class _Communities2State extends State<Communities2>
             ],
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: () => showDialog(
-              context: context,
-              builder: (context) => NewQuestion(),
-            ),
+            onPressed: _postNewQuestion,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
