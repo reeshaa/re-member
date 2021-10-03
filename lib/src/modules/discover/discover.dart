@@ -58,6 +58,7 @@ class _DiscoverState extends State<Discover>
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 12, 8, 8),
@@ -118,6 +119,7 @@ class _DiscoverState extends State<Discover>
                             color: Colors.grey[100],
                           ),
                           child: ListView(
+                            physics: BouncingScrollPhysics(),
                             children: [
                               Column(children: <Widget>[
                                 Padding(
