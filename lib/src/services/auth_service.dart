@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:re_member/src/services/api.dart';
+import 'package:re_member/src/services/notification_service.dart';
 import 'package:re_member/src/services/service_locator.dart';
 import 'package:re_member/src/services/userService.dart';
 import 'package:re_member/src/utils/enum.dart';
@@ -20,9 +21,10 @@ class AuthService extends ChangeNotifier {
     _loadAuthData().then(
       (_) {
         print(_uid);
-        if (_uid != null || _uid == "")
+        if (_uid != null || _uid == "") {
           _authState = AuthState.loggedIn;
-        else
+          NotificationService(_uid);
+        } else
           _authState = AuthState.loggedOut;
         notifyListeners();
       },

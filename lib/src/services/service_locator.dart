@@ -14,5 +14,4 @@ void setup() async {
   await Firebase.initializeApp();
   ServiceLocator.registerSingleton<Api>(Api());
   ServiceLocator.registerSingleton<UserService>(UserService());
-  NotificationService();
 }

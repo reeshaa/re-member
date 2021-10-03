@@ -1,20 +1,40 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 //
 class NotificationService {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  NotificationService() {
+  NotificationService(uid) {
     getToken().then((token) {
       print("fcm token");
+      sendFcmToken(token, uid);
       print(token);
+      init();
     });
   }
+  sendFcmToken(token, String uid) async {
+    var headers = {'uid': uid, 'Content-Type': 'application/json'};
+    var request = http.Request('POST',
+        Uri.parse('http://aakashp.freemyip.com/re-member-server/register/fcm'));
+    request.body = json.encode({"fcmToken": token});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('ic_notif');
     final InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
     var flutterlocalnotifications = FlutterLocalNotificationsPlugin();
@@ -23,7 +43,7 @@ class NotificationService {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
-      print(notification);
+      // print(notification?.body);
       print(message);
       AndroidNotification? android = message.notification?.android;
 
