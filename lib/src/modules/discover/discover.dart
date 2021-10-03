@@ -83,7 +83,7 @@ class _DiscoverState extends State<Discover>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Connect",
+                Text("Discover",
                     style: TextStyle(
                         fontSize: size.height * 0.042,
                         fontWeight: FontWeight.w700)),
@@ -120,7 +120,66 @@ class _DiscoverState extends State<Discover>
                           child: ListView(
                             children: [
                               Column(children: <Widget>[
-                                Padding(
+                              
+                               Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      24.0, 10, 24, 10),
+                                  child: Container(
+                                    height: 150,
+                                    child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        elevation: 24,
+                                        child: ListView(children: [
+                                          ListTile(
+                                            leading: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  "http://clipart-library.com/images_k/transparent-minion/transparent-minion-23.png"),
+                                            ),
+                                            title: Text('Mr. Jow'),
+                                            subtitle: Text('69 followers'),
+                                            trailing: Container(
+                                              height: 50,
+                                              child: SizedBox(
+                                                height: 50,
+                                                width: 50,
+                                                child: Container(
+                                                  height: 50,
+                                                  child: AchievementCard(
+                                                    image: Image.asset(
+                                                      "assets/images/medal.png",
+                                                      height: size.width * 0.1,
+                                                    ),
+                                                    heading: "",
+                                                    subheading: "",
+                                                    size: size,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Chip(
+                                                  label: Text("Physics"),
+                                                  backgroundColor:
+                                                      Colors.green[100]),
+                                              Chip(
+                                                  label: Text("Math"),
+                                                  backgroundColor:
+                                                      Colors.green[100]),
+                                              Chip(
+                                                  label: Text("Biology"),
+                                                  backgroundColor:
+                                                      Colors.green[100]),
+                                            ],
+                                          ),
+                                        ])),
+                                  ),
+                                ), Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -175,8 +234,7 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ),
-                                Padding(
+                                ), Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -231,8 +289,7 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ),
-                                Padding(
+                                ), Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -287,8 +344,7 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ),
-                                Padding(
+                                ), Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -343,8 +399,7 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ),
-                                Padding(
+                                ), Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
@@ -399,64 +454,7 @@ class _DiscoverState extends State<Discover>
                                           ),
                                         ])),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      24.0, 10, 24, 10),
-                                  child: Container(
-                                    height: 150,
-                                    child: Card(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        elevation: 24,
-                                        child: ListView(children: [
-                                          ListTile(
-                                            leading: CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  "http://clipart-library.com/images_k/transparent-minion/transparent-minion-23.png"),
-                                            ),
-                                            title: Text('Mr. Jow'),
-                                            subtitle: Text('69 followers'),
-                                            trailing: Container(
-                                              height: 50,
-                                              child: SizedBox(
-                                                height: 50,
-                                                width: 50,
-                                                child: AchievementCard(
-                                                  image: Image.asset(
-                                                    "assets/images/medal.png",
-                                                    height: size.width * 0.1,
-                                                  ),
-                                                  heading: "",
-                                                  subheading: "",
-                                                  size: size,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Chip(
-                                                  label: Text("Physics"),
-                                                  backgroundColor:
-                                                      Colors.green[100]),
-                                              Chip(
-                                                  label: Text("Math"),
-                                                  backgroundColor:
-                                                      Colors.green[100]),
-                                              Chip(
-                                                  label: Text("Biology"),
-                                                  backgroundColor:
-                                                      Colors.green[100]),
-                                            ],
-                                          ),
-                                        ])),
-                                  ),
-                                ),
-                                Padding(
+                                ), Padding(
                                   padding: const EdgeInsets.fromLTRB(
                                       24.0, 10, 24, 10),
                                   child: Container(
