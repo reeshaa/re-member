@@ -202,8 +202,14 @@ class LeaderboardCard extends StatelessWidget {
           );
         },
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        title: Text(entry.displayName),
-        leading: CircleAvatar(),
+        title: Text(
+          entry.displayName,
+          style: TextStyle(fontSize: 20),
+        ),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(
+              "http://clipart-library.com/images_k/transparent-minion/transparent-minion-23.png"),
+        ),
         trailing: Text(entry.points.toString() + " LP"),
       ),
     );
