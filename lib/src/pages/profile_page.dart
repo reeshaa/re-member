@@ -281,6 +281,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fontSize: size.height * 0.03,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.grey[800])),
+                          SizedBox(height: 12),
+                          Center(
+                            child: Text(
+                              "No activity found",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontStyle: FontStyle.italic),
+                            ),
+                          )
                         ],
                       ),
                     ),
