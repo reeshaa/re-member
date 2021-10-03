@@ -66,9 +66,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? IconButton(
                                   onPressed: () => showAboutDialog(
                                     context: context,
-                                    applicationName: "Re-member App",
+                                    applicationName: "PrepSetGo",
                                     applicationLegalese:
-                                        "Submission to CodeFury 4.0",
+                                        "Submission by team Re-member to CodeFury 4.0",
                                   ),
                                   icon: Icon(Icons.info_outline),
                                   iconSize: size.width * 0.07,
