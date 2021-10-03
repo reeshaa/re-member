@@ -1,4 +1,6 @@
-# PrepSetGo | CodeFury 4.0 Winners <img src="https://user-images.githubusercontent.com/37346450/135762286-1e715879-3684-441e-86f4-36ce5559bd72.png" height="180" align="right" />
+# PrepSetGo | CodeFury 4.0 Winners
+<img src="https://user-images.githubusercontent.com/37346450/135762286-1e715879-3684-441e-86f4-36ce5559bd72.png" height="200rem" align="right" />
+
 Submission by team _Re-member_ that won the **1st Prize** in the App Development Category on 03/10/2021. 
 
 ### Problem Statement:
