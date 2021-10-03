@@ -73,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
     double regularfont = size.height * 0.025;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         key: _scaffoldKey,
         body: Form(
           key: formKey,
@@ -85,22 +86,22 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      height: size.height * 0.0825,
+                      height: size.height * 0.08,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 25),
                       child: Text(
-                        "Hey\nthere,",
+                        "PrepSetGO",
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: headingfont,
-                          fontWeight: FontWeight.w800,
+                          color: Colors.green,
+                          fontSize: 48,
+                          fontWeight: FontWeight.w700,
                         ),
                         textAlign: TextAlign.start,
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.145,
+                      height: size.height * 0.08,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20, top: 0),
@@ -114,12 +115,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height: size.height * 0.035,
                     ),
                     Visibility(
                       visible: isRegisterMode,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 15, 40, 20),
+                        padding: EdgeInsets.fromLTRB(20, 15, 20, 20),
                         child: TextFormField(
                           controller: nameController,
                           validator: (value) {
@@ -137,9 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Icon(Icons.account_circle),
                             ),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(30),
-                                  bottomRight: Radius.circular(30)),
+                              borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(color: Colors.grey),
                             ),
                           ),
@@ -147,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(bottom: 15, right: 40),
+                        padding: EdgeInsets.fromLTRB(20, 05, 20, 20),
                         child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: true,
@@ -163,9 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             labelText: "Email Address",
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(30),
-                                  bottomRight: Radius.circular(30)),
+                              borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(color: Colors.grey),
                             ),
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -176,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         )),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 05, 40, 0),
+                      padding: EdgeInsets.fromLTRB(20, 05, 20, 0),
                       child: TextFormField(
                         controller: passwordController,
                         obscureText: true,
@@ -195,83 +192,97 @@ class _LoginPageState extends State<LoginPage> {
                             child: Icon(Icons.lock),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(30),
-                                bottomRight: Radius.circular(30)),
+                            borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: Colors.grey),
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.06,
+                      height: size.height * 0.005,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          child: Text(
-                            (isRegisterMode)
-                                ? "Existing user? Login instead"
-                                : "New here? Register now",
-                            style: TextStyle(
-                                fontSize: regularfont * 0.69,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[700]),
-                          ),
-                          onPressed: toggleRegisterMode,
+                    Container(
+                      margin: EdgeInsets.only(right: 10),
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        child: Text(
+                          (isRegisterMode) ? "" : "Forgot password?",
+                          style: TextStyle(
+                              fontSize: regularfont * 0.69,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey[600]),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: ElevatedButton(
-                            child: AnimatedContainer(
-                              duration: const Duration(microseconds: 500),
-                              padding: EdgeInsets.all(15),
-                              child: (isLoading)
-                                  ? CupertinoActivityIndicator()
-                                  : Text(
-                                      (isRegisterMode) ? 'REGISTER' : 'SIGN IN',
-                                      style: TextStyle(
-                                          fontSize: regularfont * 0.9,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                            ),
-                            onPressed: () {
-                              if (formKey.currentState!.validate() &&
-                                  !isLoading) {
-                                setState(
-                                  () {
-                                    isLoading = true;
-                                  },
-                                );
-                                if (isRegisterMode)
-                                  _attemptRegister(
-                                      emailController.text.trim(),
-                                      passwordController.text.trim(),
-                                      nameController.text.trim());
-                                else
-                                  _attemptLogin(
+                        onPressed: () => showDialog(
+                            context: context,
+                            builder: (context) => ResetPassword()),
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.01),
+                    Center(
+                      child: Container(
+                        // alignment: Alignment.center,
+                        height: size.height * 0.065,
+                        width: size.width * 0.9,
+                        child: ElevatedButton(
+                          style: ButtonStyle(alignment: Alignment.center),
+                          child: AnimatedContainer(
+                            duration: const Duration(microseconds: 500),
+                            padding: EdgeInsets.all(15),
+                            child: (isLoading)
+                                ? CupertinoActivityIndicator()
+                                : Text(
+                                    (isRegisterMode) ? 'REGISTER' : 'SIGN IN',
+                                    style: TextStyle(
+                                        fontSize: regularfont * 0.9,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w800),
+                                  ),
+                          ),
+                          onPressed: () {
+                            if (formKey.currentState!.validate() &&
+                                !isLoading) {
+                              setState(
+                                () {
+                                  isLoading = true;
+                                },
+                              );
+                              if (isRegisterMode)
+                                _attemptRegister(
                                     emailController.text.trim(),
                                     passwordController.text.trim(),
-                                  );
-                              }
-                            },
-                          ),
+                                    nameController.text.trim());
+                              else
+                                _attemptLogin(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim(),
+                                );
+                            }
+                          },
                         ),
-                      ],
-                    ),
-                    TextButton(
-                      child: Text(
-                        (isRegisterMode) ? "" : "Forgot password?",
-                        style: TextStyle(
-                            fontSize: regularfont * 0.69,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey[700]),
                       ),
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: (context) => ResetPassword()),
+                    ),
+                    SizedBox(height: 10),
+                    Center(
+                      child: TextButton(
+                        style: ButtonStyle(alignment: Alignment.center),
+                        child: Text(
+                          (isRegisterMode)
+                              ? "Existing user? Login instead"
+                              : "New here? Register now",
+                          style: TextStyle(
+                              fontSize: regularfont * 0.69,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue),
+                        ),
+                        onPressed: toggleRegisterMode,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        "assets/images/aa.jpg",
+                        height: size.height * 0.22,
+                      ),
                     ),
                   ],
                 ),
