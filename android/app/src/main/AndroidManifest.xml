@@ -15,7 +15,7 @@
   </queries>
 
    <application
-        android:label="re_member"
+        android:label="PrepSetGO"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
