@@ -12,7 +12,7 @@ class ExploreChildren extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> exploreSliders(List<String> imageList) {
+    List<Widget> exploreSliders(List<Map<String, dynamic>> imageList) {
       return imageList
           .map((item) => Container(
                 child: GestureDetector(
@@ -31,8 +31,8 @@ class ExploreChildren extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         child: Stack(
                           children: <Widget>[
-                            Image.network(item,
-                                fit: BoxFit.fitHeight, width: 150),
+                            Image.network(item["img"],
+                                fit: BoxFit.cover, width: 150),
                             Positioned(
                               bottom: 0.0,
                               left: 0.0,
@@ -52,7 +52,7 @@ class ExploreChildren extends StatelessWidget {
                                     vertical: 10.0, horizontal: 20.0),
                                 child: Text(
                                   // item.communityName,
-                                  "dummy",
+                                  item["title"],
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20.0,
