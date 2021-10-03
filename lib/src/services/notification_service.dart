@@ -10,11 +10,12 @@ class NotificationService {
     getToken().then((token) {
       print("fcm token");
       print(token);
+      init();
     });
   }
   init() async {
     final AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('ic_notif');
     final InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
     var flutterlocalnotifications = FlutterLocalNotificationsPlugin();
@@ -23,7 +24,7 @@ class NotificationService {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
-      print(notification);
+      print(notification.body);
       print(message);
       AndroidNotification? android = message.notification?.android;
 
