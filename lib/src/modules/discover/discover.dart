@@ -18,26 +18,13 @@ class _DiscoverState extends State<Discover>
     with SingleTickerProviderStateMixin {
   bool isChecked = false;
   late final tabController;
-  List<LB_Entry>? entries;
 
-  bool isLoading = true;
+  bool isLoading = false;
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
-    _getData();
-    super.initState();
-  }
 
-  _getData() async {
-    var data = await ServiceLocator<Api>().GET(Api.leaderboardEndpoint);
-    if (data != null && data.statusCode == 200) {
-      entries = data.data["Discover"]
-          .map<LB_Entry>((a) => LB_Entry.fromMap(a))
-          .toList();
-    }
-    setState(() {
-      isLoading = false;
-    });
+    super.initState();
   }
 
   @override
@@ -132,7 +119,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -188,7 +175,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -244,7 +231,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -300,7 +287,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -356,7 +343,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -412,7 +399,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -468,7 +455,7 @@ class _DiscoverState extends State<Discover>
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         elevation: 24,
-                                        child: ListView(children: [
+                                        child: Column(children: [
                                           ListTile(
                                             leading: CircleAvatar(
                                               backgroundImage: NetworkImage(
