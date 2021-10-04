@@ -39,7 +39,7 @@ Your team is tasked with developing a web-based/app-based virtual learning envir
 	```
 	> You may also want to create a new Firebase Project and replace the *google-services.json* file with your own at */android/app*.
 	
-3. Clone the repository
+3. Run the project
    ```bash
    $ flutter run
    ```
